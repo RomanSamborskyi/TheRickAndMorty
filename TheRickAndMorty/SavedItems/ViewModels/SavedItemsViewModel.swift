@@ -43,11 +43,12 @@ class SavedItemsViewModel: ObservableObject {
         }
     }
     
-    func addEpisode(name: String, episode: String, airDate: String) {
+    func addEpisode(name: String, episode: String, airDate: String, id: Int16) {
         let newEpisode = EpisodeEntity(context: coreData.context)
         newEpisode.name = name
         newEpisode.episode = episode
         newEpisode.airdate = airDate
+        newEpisode.id = id
         save()
     }
     
@@ -58,7 +59,13 @@ class SavedItemsViewModel: ObservableObject {
         save()
     }
     
-    func addCharackter(name: String, episode: String, stauts: String, species: String, location: String, image: String) {
+    func unsaveEpisode(model: Episod) {
+        guard let item = savedEpisodes.first(where: { $0.id == model.id ?? 0 }) else { return }
+        coreData.context.delete(item)
+        save()
+    }
+    
+    func addCharackter(name: String, episode: String, stauts: String, species: String, location: String, image: String, id: Int) {
         let newCharackter = CharackterEntity(context: coreData.context)
         newCharackter.name = name
         newCharackter.episode = episode
@@ -68,6 +75,7 @@ class SavedItemsViewModel: ObservableObject {
         newCharackter.isSaved = false
         newCharackter.date = Date()
         newCharackter.imageURL = image
+        newCharackter.id = Int16(id)
         save()
     }
     
@@ -75,6 +83,12 @@ class SavedItemsViewModel: ObservableObject {
         guard let index = index.first else { return }
         let deletedCharackter = savedCaharackters[index]
         coreData.context.delete(deletedCharackter)
+        save()
+    }
+    
+    func unsaveCharackter(for id: Charackter) {
+        guard let item = savedCaharackters.first(where: { $0.id == id.id ?? 0 }) else { return }
+        coreData.context.delete(item)
         save()
     }
     

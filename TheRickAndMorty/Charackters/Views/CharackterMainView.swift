@@ -43,6 +43,10 @@ struct CharackterMainView: View {
                     vm.searchResults.removeAll()
                 }
             }
+            .refreshable {
+                vm.charackters.removeAll()
+                vm.getEpisodeInfo()
+            }
         }
     }
 }

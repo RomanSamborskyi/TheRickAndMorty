@@ -51,9 +51,13 @@ struct EpisodesDetailView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            svm.addEpisode(name: model.name ?? "", episode: model.episode ?? "", airDate: model.airDate ?? "")
+                            if !svm.savedEpisodes.contains(where: { $0.id == model.id ?? 0 }) {
+                                svm.addEpisode(name: model.name ?? "", episode: model.episode ?? "", airDate: model.airDate ?? "",id: Int16(model.id ?? 0))
+                            } else {
+                                svm.unsaveEpisode(model: model)
+                            }
                         }, label: {
-                            Image(systemName:svm.savedEpisodes.contains(where: { $0.name == model.name ?? "" }) ? "bookmark.fill" : "bookmark")
+                            Image(systemName:svm.savedEpisodes.contains(where: { $0.id == model.id ?? 0 }) ? "bookmark.fill" : "bookmark")
                         })
                     }
                 }

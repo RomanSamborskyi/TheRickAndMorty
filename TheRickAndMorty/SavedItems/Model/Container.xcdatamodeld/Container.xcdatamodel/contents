@@ -3,6 +3,7 @@
     <entity name="CharackterEntity" representedClassName="CharackterEntity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="episode" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="isSaved" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="locationName" optional="YES" attributeType="String"/>
@@ -13,6 +14,7 @@
     <entity name="EpisodeEntity" representedClassName="EpisodeEntity" syncable="YES" codeGenerationType="class">
         <attribute name="airdate" optional="YES" attributeType="String"/>
         <attribute name="episode" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
 </model>

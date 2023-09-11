@@ -39,10 +39,14 @@ struct PersonageView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        svm.addCharackter(name: model.name ?? "", episode: model.episode?.first ?? "", stauts: model.status ?? "", species: model.species ?? "", location: model.location?.name ?? "", image: model.image ?? "")
-                        model = model.makeSaved(newValue: true)
+                        if !svm.savedCaharackters.contains(where: { $0.id == model.id ?? 0 }) {
+                            svm.addCharackter(name: model.name ?? "", episode: model.episode?.first ?? "", stauts: model.status ?? "", species: model.species ?? "", location: model.location?.name ?? "", image: model.image ?? "", id: model.id ?? 0)
+                            model = model.makeSaved(newValue: true)
+                        } else {
+                            svm.unsaveCharackter(for: model)
+                        }
                     }, label: {
-                        Image(systemName:svm.savedCaharackters.contains(where: { $0.name == model.name ?? "" }) ? "bookmark.fill" : "bookmark")
+                        Image(systemName:svm.savedCaharackters.contains(where: { $0.id == model.id ?? 0 }) ? "bookmark.fill" : "bookmark")
                     })
                 }
             }

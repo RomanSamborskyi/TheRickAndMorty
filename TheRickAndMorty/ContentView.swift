@@ -38,7 +38,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("Saved", systemImage: "bookmark.fill")
                     }
-            }.tint(Color.green)
+            }.tint(Color.orange)
         }
     }
 }
